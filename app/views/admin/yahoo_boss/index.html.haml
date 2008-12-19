@@ -1,0 +1,36 @@
+-if @yahoo_boss
+  -form_for :yahoo_boss, :url=>"/admin/yahoo_boss/update" do |form|
+    %table#index
+      %tr
+        %th Appid
+        %td
+          =form.text_field :key
+      %tr
+        %th Use modified string?
+        %td
+          ="<input id='rad_1' type='radio' name='yahoo_boss[modified_strings]' value='0'> - No"
+      %tr
+        %th
+        %td
+          ="<input id='rad_2' type='radio' name='yahoo_boss[modified_strings]' value='1'> - Yes"
+          %script
+            ="window.document.getElementById('rad_1').checked= true;" if !@yahoo_boss
+            ="window.document.getElementById('rad_2').checked= true;" if @yahoo_boss
+    =form.submit "Save this configuration"
+
+-else
+  -form_for :yahoo_boss, :url=>"/admin/yahoo_boss/create" do |form|
+    %table#index
+      %tr
+        %th Appid
+        %td
+          =form.text_field :key
+      %tr
+        %th Use modified string?
+        %td
+          ="<input type='radio' name='yahoo_boss[modified_strings]' value='0'> - No"
+      %tr
+        %th
+        %td
+          "<input type='radio' name='yahoo_boss[modified_strings]' value='1'> - Yes"
+    =form.submit "Save this configuration"

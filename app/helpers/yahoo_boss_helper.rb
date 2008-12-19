@@ -1,0 +1,2 @@
+module YahooBossHelper
+end

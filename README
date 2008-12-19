@@ -1,0 +1,13 @@
+= Yahoo Boss
+INSTALL
+======
+run the rake db:migrate:extensions
+
+
+
+TODO
+====
+take the uri and send it to BOSS via open-uri and output the results
+
+for the ip address:
+http://snippets.dzone.com/posts/show/3814

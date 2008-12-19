@@ -1,0 +1,25 @@
+%head 
+  %title Report making
+%body
+  -form_for :makereport , :url=>"/yahoo_boss/save_report" do |form|
+    ="<input type='hidden' name='search_string' value='#{params[:search_string]}' />"
+    ="<input type='hidden' name='search_type' value='#{params[:search_type]}' />"
+    -if params[:search] != nil
+      -for s in params[:search]
+        ="<input type='hidden' name='search[#{s[0]}]' value='#{s[1]}' />"
+    -if params[:web] != nil
+      -for w in params[:web]
+        ="<input type='hidden' name='web[#{w[1]}]' value='#{w[1]}' />"
+    -if params[:images] != nil
+      -for i in params[:images]
+        ="<input type='hidden' name='images[#{i[0]}]' value='#{i[1]}' />"
+    -if params[:news] != nil
+      -for n in params[:news]
+        ="<input type='hidden' name='news[#{n[0]}]' value='#{n[1]}' />"
+    -if params[:results] != nil
+      -for n in params[:results]
+        ="<input type='hidden' name='results[#{n[0]}]' value='#{n[1]}' />"
+    ="<input type='hidden' name='url' value='#{@url}' />"
+    
+    =form.text_field :email
+    =form.submit "Send EMail"

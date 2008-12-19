@@ -1,0 +1,9 @@
+%table#index
+  %tr
+    %th Worlds
+  -for word in @dictionaries
+    %tr
+      %td
+        =word.word
+      %td
+        =link_to "Delete", "/admin/yahoo_boss/destroy_dictionary?id=#{word.id}"

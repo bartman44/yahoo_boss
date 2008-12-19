@@ -1,0 +1,37 @@
+-form_remote_for :results, :url=>"/yahoo_boss/report", :update=>"test" do |form|
+  ="<input type='hidden' name='search_string' value='#{params[:search_string]}' />"
+  -for s in params[:search]
+    ="<input type='hidden' name='search[#{s[0]}]' value='#{s[1]}' />"
+  -for w in params[:web]
+    ="<input type='hidden' name='web[#{w[1]}]' value='#{w[1]}' />"
+  -for i in params[:images]
+    ="<input type='hidden' name='images[#{i[0]}]' value='#{i[1]}' />"
+  -for n in params[:news]
+    ="<input type='hidden' name='news[#{n[0]}]' value='#{n[1]}' />"
+  
+  -if params["search_type"] == "all"
+    ="<input type='hidden' name='search_type' value='all' />"
+    .web
+      ="<H1>WEB</H1>"
+      ="<a href='/yahoo_boss/search?search_type=web&search_string=#{params[:search_string]}'>More results</a>"
+      ="<input type='hidden' name='url[web]' value='#{@urls[0]}'/>"
+      -for result in @results[0]
+        =result
+    .images
+      ="<H1>IMAGES</H1>"
+      ="<a href='/yahoo_boss/search?search_type=images&search_string=#{params[:search_string]}'>More results</a>"
+      ="<input type='hidden' name='url[images]' value='#{@urls[1]}'/>"
+      -for result in @results[1]
+        =result
+    .news
+      ="<H1>NEWS</H1>"
+      ="<a href='/yahoo_boss/search?search_type=news&search_string=#{params[:search_string]}'>More results</a>"
+      ="<input type='hidden' name='url[news]' value='#{@urls[2]}'/>"
+      -for result in @results[2]
+        =result
+  -else
+    ="<input type='hidden' name='search_type' value='#{params["search_type"]}' />"
+    ="<input type='hidden' name='url[#{params["search_type"]}]' value='#{@urls[0]}'/>"
+    -for result in @results[0]
+      =result
+  =form.submit "Make report"

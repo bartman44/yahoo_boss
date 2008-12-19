@@ -1,0 +1,9 @@
+%table#index
+  %tr
+    %th Stop Worlds
+  -for word in @stop_words
+    %tr
+      %td
+        =word.word
+      %td
+        =link_to "Delete", "/admin/yahoo_boss/destroy_stop_word?id=#{word.id}"

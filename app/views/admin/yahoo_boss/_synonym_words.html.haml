@@ -1,0 +1,9 @@
+%table#index
+  %tr
+    %th Synonyms
+  -for word in @synonym_words
+    %tr
+      %td
+        =word.word
+      %td
+        =link_to "Delete", "/admin/yahoo_boss/destroy_synonym_word?id=#{word.id}"

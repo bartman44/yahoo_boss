@@ -1,0 +1,31 @@
+%script{:language=>"JavaScript"}
+  function select_all(){
+  -for id in @daily_words
+    ="window.document.getElementById(\"#{id.id}\").checked = true"
+  }
+  
+  function unselect_all(){
+  -for id in @daily_words
+    ="window.document.getElementById(\"#{id.id}\").checked = false"
+  }
+
+-form_for :words, :url=>"/admin/yahoo_boss/save_words" do |f|
+  %table#index
+    %tr
+      %th Word
+      %th
+      %th (only for synonyms)
+    -for word in @daily_words
+      %tr
+        %td=word.query
+        %td=check_box_tag word.id, word.id
+        %td=text_field_tag "synonym[#{word.id}]"
+  =link_to "Select all", "#", {:onclick=>"select_all();"}
+  =link_to "Unselect all", "#", {:onclick=>"unselect_all();"}
+  %br
+  
+  %select{:name=>"actions"}
+    %option{:value=>"stop_words"}="Stop Words"
+    %option{:value=>"dictionaries"}="Dictionaries"
+    %option{:value=>"synonym_words"}="Synonyms"
+  =f.submit 'Save these words'
